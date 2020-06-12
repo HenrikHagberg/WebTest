@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["WebTest.csproj","WebTest/"]
 RUN dotnet restore "WebTest/WebTest.csproj"
 COPY . .
-WORKDIR "/src/WebTest"
+WORKDIR /src/WebTest
 RUN dotnet build "WebTest.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -21,3 +21,6 @@ ENTRYPOINT ["dotnet", "app/WebTest.dll"]
 
 
 
+#FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
+#COPY bin/Release/netcoreapp3.0/publish app/
+#ENTRYPOINT ["dotnet", "app/WebTest.dll"]
